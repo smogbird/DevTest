@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace DeveloperTest.Database.Models
 {
@@ -9,5 +10,7 @@ namespace DeveloperTest.Database.Models
         public string Engineer { get; set; }
 
         public DateTime When { get; set; }
+        public int? CustomerId { get; set; }
+        public virtual Customer Customer { get; set; }
     }
 }

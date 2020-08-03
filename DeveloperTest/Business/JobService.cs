@@ -3,6 +3,7 @@ using DeveloperTest.Business.Interfaces;
 using DeveloperTest.Database;
 using DeveloperTest.Database.Models;
 using DeveloperTest.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DeveloperTest.Business
 {
@@ -17,21 +18,27 @@ namespace DeveloperTest.Business
 
         public JobModel[] GetJobs()
         {
-            return context.Jobs.Select(x => new JobModel
+            return context.Jobs
+                .Include(j => j.Customer)
+                .Select(x => new JobModel
             {
                 JobId = x.JobId,
                 Engineer = x.Engineer,
-                When = x.When
+                When = x.When,
+                Customer = x.Customer.Map()
             }).ToArray();
         }
 
         public JobModel GetJob(int jobId)
         {
-            return context.Jobs.Where(x => x.JobId == jobId).Select(x => new JobModel
+            return context.Jobs.Where(x => x.JobId == jobId)
+                          .Include(j => j.Customer)
+                          .Select(x => new JobModel
             {
                 JobId = x.JobId,
                 Engineer = x.Engineer,
-                When = x.When
+                When = x.When,
+                Customer = x.Customer.Map()
             }).SingleOrDefault();
         }
 
@@ -40,16 +47,20 @@ namespace DeveloperTest.Business
             var addedJob = context.Jobs.Add(new Job
             {
                 Engineer = model.Engineer,
-                When = model.When
+                When = model.When,
+                CustomerId = model.CustomerId
             });
 
             context.SaveChanges();
+
+            var customer = context.Customers.SingleOrDefault(x => x.CustomerId.Equals(model.CustomerId)).Map();
 
             return new JobModel
             {
                 JobId = addedJob.Entity.JobId,
                 Engineer = addedJob.Entity.Engineer,
-                When = addedJob.Entity.When
+                When = addedJob.Entity.When,
+                Customer = customer
             };
         }
     }

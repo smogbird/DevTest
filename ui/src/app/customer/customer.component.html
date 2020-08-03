@@ -1,0 +1,35 @@
+<h2>New Customer form</h2>
+<form #customerForm="ngForm" (ngSubmit)="createCustomer(customerForm)">
+  <label for="customerName">Customer Name</label>
+  <input type="text" name="customerName" minlength="5" ngModel required #customerName="ngModel" [(ngModel)]="newCustomer.customerName" />
+  <small *ngIf="customerName.invalid">Please enter a valid name. The name should be a minimum of 5 characters</small>
+  <label for="customerType">Customer Type</label>
+  <select name="customerType" required #customerType="ngModel" ngModel placeholder="Please select" [(ngModel)]="newCustomer.customerType">
+    <option [ngValue]="undefined" selected>Please select</option>
+    <option *ngFor="let customerType of customerTypes">{{customerType}}</option>
+  </select>
+  <small *ngIf="customerType.invalid">Please select a customer Type</small>
+  <button type="submit" [disabled]="customerForm.invalid">Add Customer</button>
+</form>
+
+<div *ngIf="customers?.length > 0">
+<h2>Customer list</h2>
+<table spacing="0">
+  <thead>
+    <tr>
+      <th>Customer</th>
+      <th>Type</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let customer of customers">
+      <td>{{customer.customerName}}</td>
+      <td>{{customer.customerType}}</td>
+      <td>
+        <a [routerLink]="['/customer', customer.customerId]">View</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>

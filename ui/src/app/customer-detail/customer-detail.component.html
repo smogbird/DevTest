@@ -1,0 +1,10 @@
+<ng-container *ngIf="!customer; else data">
+    <small>{{errorMessage}}</small>    
+</ng-container>
+<ng-template #data>
+    <p>CustomerId: {{customer.customerId}}</p>
+    <p>Name: {{customer.customerName}}</p>
+    <p>Type: {{customer.customerType}}</p>
+</ng-template>
+
+<a [routerLink]="['/customers']">Back</a>

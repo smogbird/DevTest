@@ -5,6 +5,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200801191043_AddJobCustomer.cs" />
+    <Compile Remove="Migrations\20200801191043_AddJobCustomer.Designer.cs" />
+    <Compile Remove="Migrations\20200801191200_AddJobCustomer.cs" />
+    <Compile Remove="Migrations\20200801191200_AddJobCustomer.Designer.cs" />
+    <Compile Remove="Migrations\20200801191652_AddJobCustomer.cs" />
+    <Compile Remove="Migrations\20200801191652_AddJobCustomer.Designer.cs" />
+    <Compile Remove="Migrations\20200801192043_AddJobCustomer.cs" />
+    <Compile Remove="Migrations\20200801192043_AddJobCustomer.Designer.cs" />
+    <Compile Remove="Migrations\20200801192351_AddJobCustomer.cs" />
+    <Compile Remove="Migrations\20200801192351_AddJobCustomer.Designer.cs" />
+    <Compile Remove="Migrations\20200801193533_AddJobCustomer.cs" />
+    <Compile Remove="Migrations\20200801193533_AddJobCustomer.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.1">

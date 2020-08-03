@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { JobModel } from '../models/job.model';
+import { JobCreateModel } from '../models/job-create.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,7 @@ export class JobService {
   }
 
   public CreateJob(job: JobModel): Promise<object> {
-    return this.httpClient.post('http://localhost:63235/job', job).toPromise();
+   var data: JobCreateModel = {customerId: job.customer.customerId, engineer: job.engineer,  when: job.when  }
+    return this.httpClient.post('http://localhost:63235/job', data).toPromise();
   }
 }
